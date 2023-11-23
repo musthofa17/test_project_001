@@ -35,7 +35,7 @@
         <td>{{ ++$i }}</td>
         <td>{{ $product->name }}</td>
         <td>{{ $product->detail }}</td>
-        <td>
+        <!-- <td>
             <form action="{{ route('products.destroy',$product->id) }}" method="POST">
                 @can('product-edit')
                 <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
@@ -48,10 +48,15 @@
 
                 @endcan
             </form>
-        </td>
+        </td> -->
         <td>
+            @can('product-edit')
+            <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+            @endcan
+            @can('product-delete')
             <a href="{{ route('products.destroy',$product->id) }}" class="btn btn-danger"
                 data-confirm-delete="true">Hapus</a>
+            @endcan
         </td>
     </tr>
     @endforeach
