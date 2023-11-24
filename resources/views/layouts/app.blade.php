@@ -57,10 +57,17 @@
                         </li> -->
                         @endif
                         @else
+                        @can('user-list')
                         <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                        @endcan
+                        @can('role-list')
                         <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
+                        @endcan
                         <!-- <li><a class="nav-link" href="{{ route('products.index') }}">Manage Product</a></li> -->
+                        @can('permintaan-list')
                         <li><a class="nav-link" href="{{ route('permintaans.index') }}">Manage Pengajuan</a></li>
+                        @endcan
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -92,5 +99,6 @@
         @include('sweetalert::alert')
     </div>
 </body>
+@stack('stack')
 
 </html>

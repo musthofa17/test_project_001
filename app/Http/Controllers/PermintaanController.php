@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Permintaan;
 use Alert;
 
@@ -121,6 +122,60 @@ class PermintaanController extends Controller
         toast('Data berhasil dihapus!','success');
         // return redirect()->route('permintaans.index')->with('success','permintaan deleted successfully');
         return redirect()->back();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Permintaan  $permintaan
+     * @return \Illuminate\Http\Response
+     */
+    public function showApproval(Permintaan $permintaan)
+    {
+        return view('permintaans.approval',compact('permintaan'));
+    }
+
+    public function getDataApproval(Request $request){
+        $permintaan = Permintaan::where('id',$request->id)->first();
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Data Permintaan',
+            'data'    => $permintaan
+        ]);
+    }
+
+    /**
+     * approved
+     *
+     * @param  mixed $request
+     * @param  mixed $post
+     * @return void
+     */
+    public function approved(Request $request, Permintaan $post)
+    {
+        //define validation rules
+        $validator = Validator::make($request->all(), [
+            'is_approved'     => 'require',
+            // 'approved_at'   => 'harga_baru',
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        //create post
+        $post->update([
+            'is_approved'   => $request->is_approved,
+            'approved_at'   => now()
+        ]);
+
+        //return response
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Diudapte!',
+            'data'    => $post
+        ]);
     }
 
 

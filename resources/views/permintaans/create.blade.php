@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tanggal Pengajuan:</strong>
-                <input type="text" name="tanggal_pengajuan" class="form-control" placeholder="2023-11-22">
+                <input type="date" name="tanggal_pengajuan" class="form-control datepicker" placeholder="2023-11-22">
                 <input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id }}">
             </div>
         </div>
