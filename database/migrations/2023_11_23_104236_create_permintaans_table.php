@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('nama_mesin');
             $table->integer('harga');
             $table->integer('harga_baru');
-            $table->integer('is_approved');
-            $table->datetime('approved_at');
+            $table->integer('is_approved')->nullable();
+            $table->datetime('approved_at')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
         });
